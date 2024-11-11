@@ -26,11 +26,11 @@ def fastExpo(x, e, m, y=1):
     elif e % 2 == 0:
         x2 = (x ** 2) % m
         e2 = e / 2
-        return fastExpoRecur(x2, e2, m, y)
+        return fastExpo(x2, e2, m, y)
     else:
         y2 = (x * y) % m
         e2 = e - 1
-        return fastExpoRecur(x, e2, m, y2)
+        return fastExpo(x, e2, m, y2)
 
 # Primitive Root Search Algo
 

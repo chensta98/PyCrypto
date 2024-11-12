@@ -9,7 +9,7 @@ def gcd(a, b):
         return gcd(b, a % b)
 
 # Extended Euclid
-def extendedGcd(a, b):
+def extendedEuclid(a, b):
     x, y = 0, 1
     u, v = 1, 0 
     while a != 0:
@@ -34,7 +34,6 @@ def fastExpo(x, e, m, y=1):
         y2 = (x * y) % m
         e2 = e - 1
         return fastExpo(x, e2, m, y2)
-
 
 # Prime Factorization
 def primeFactors(n):
@@ -69,10 +68,28 @@ def primRootSearch(n):
 
     # print("Count:   %d" % (count))
     return root
-  
-
-
 
 # Baby-Step Giant-Step
+def babyStepGiantStep(b, a, p):
+    m = math.ceil(math.sqrt(p - 1))
+    jdict = {}
 
+    # Compute b ^ all values from 0 to sqrt p and put in Dict
+    for x in range(m):
+        jdict[fastExpo(b, x, p)] = x
+
+    # Get Inverse of b
+    _, inv, _ = extendedEuclid(b, p)
+    if inv < 0:
+        inv = inv + p
+    
+    c = fastExpo(inv, m, p)
+
+    for i in range(m):
+        res = (fastExpo(c, i, p) * a) % p
+        if res in jdict:
+            return ((i * m) + jdict[res]) % (p - 1)
+
+    
+    
 

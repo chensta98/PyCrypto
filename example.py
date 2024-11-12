@@ -9,3 +9,6 @@ if __name__ == "__main__":
 
     print(chensta_crypto.extendedGcd(131,18))
 
+    print(chensta_crypto.primeFactors(700))
+
+    print(chensta_crypto.primRootSearch(293))

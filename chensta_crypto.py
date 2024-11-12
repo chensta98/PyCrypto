@@ -1,3 +1,6 @@
+import math
+import secrets
+
 # Greatest Common Divisor using Euclid Algo
 def gcd(a, b):
     if b == 0:
@@ -32,7 +35,43 @@ def fastExpo(x, e, m, y=1):
         e2 = e - 1
         return fastExpo(x, e2, m, y2)
 
+
+# Prime Factorization
+def primeFactors(n):
+    factors = []
+    
+    while n % 2 == 0:
+        factors.append(2)
+        n = n / 2
+
+    for x in range(3,math.ceil(math.sqrt(n))+2, 2):
+        while n % x == 0:
+            factors.append(x)
+            n = n / x
+
+    return factors
+
 # Primitive Root Search Algo
+def primRootSearch(n):
+    rootFound = False
+    count = 0
+
+    while rootFound == False:
+        count = count + 1
+        root = secrets.randbelow(n)
+        rootFound = True
+        factors = list(set(primeFactors(n-1)))
+
+        for x in factors:
+            # print("Root:    %d  p-1/q:  %d  M:  %d" % (root,(n-1)/x,n))
+            if fastExpo(root,(n-1)/x,n) == 1:
+                rootFound = False
+
+    # print("Count:   %d" % (count))
+    return root
+  
+
+
 
 # Baby-Step Giant-Step
 

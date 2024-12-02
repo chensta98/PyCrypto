@@ -1,6 +1,7 @@
 import chensta_crypto
 
 if __name__ == "__main__":
+    
     print("crypto math testing")
 
     print(chensta_crypto.gcd(12091,3))
@@ -14,3 +15,5 @@ if __name__ == "__main__":
     print(chensta_crypto.primRootSearch(293))
 
     print(chensta_crypto.babyStepGiantStep(2,3,29))
+
+    print(chensta_crypto.millerRabin(90))

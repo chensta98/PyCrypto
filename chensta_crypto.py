@@ -1,5 +1,6 @@
 import math
 import secrets
+import random
 
 # Greatest Common Divisor using Euclid Algo
 def gcd(a, b):
@@ -90,6 +91,34 @@ def babyStepGiantStep(b, a, p):
         if res in jdict:
             return ((i * m) + jdict[res]) % (p - 1)
 
+def millerRabin(n, rounds=2):
+    if n % 2 == 0:
+        return False
     
+    even = n - 1
+    s = 0
+    while even % 2 == 0:
+        s = s + 1
+        even = even / 2
+
+    print("d: %d    s: %d" % (even, s))
+
+    for k in range(rounds):
+        a = random.randrange(2, n - 2)
+        x = fastExpo(a, even, n)
+        for j in range(s):
+            y = fastExpo(x, 2, n)
+            if y == 1 and x != 1 and x != n - 1:
+                return False
+            x = y
+        if y != 1:
+            return False
+    return True
+
+        
+        
+        
+
+
     
 

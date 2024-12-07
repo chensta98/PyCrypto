@@ -92,6 +92,9 @@ def babyStepGiantStep(b, a, p):
             return ((i * m) + jdict[res]) % (p - 1)
 
 def millerRabin(n, rounds=2):
+    if n <= 3:
+        return True
+
     if n % 2 == 0:
         return False
     
@@ -101,7 +104,7 @@ def millerRabin(n, rounds=2):
         s = s + 1
         even = even / 2
 
-    print("d: %d    s: %d" % (even, s))
+    # print("d: %d    s: %d" % (even, s))
 
     for k in range(rounds):
         a = random.randrange(2, n - 2)
@@ -115,6 +118,13 @@ def millerRabin(n, rounds=2):
             return False
     return True
 
+def decToBin(n):
+    arr = []
+    while n >= 1:
+        arr.insert(0, n % 2)
+        n = n // 2
+    
+    return arr
         
         
         

@@ -49,3 +49,25 @@ class NaorRein:
             dot_sum = dot_sum + (self.r_bin[pos] * beta_bin[pos])
         
         return dot_sum % 2
+
+def blumBlumShub(length, prime_size=1000):
+    p = random.randrange(prime_size)
+    q = random.randrange(prime_size)
+    while (not chensta_crypto.millerRabin(p)) or (p%4 != 3):
+        p = random.randrange(prime_size)
+    while (not chensta_crypto.millerRabin(q)) or (q%4 != 3):
+        q = random.randrange(prime_size)
+
+    n = p * q
+    s_0 = random.randrange(1,n)
+    while chensta_crypto.gcd(s_0, n) != 1:
+        s_0 = random.randrange(1,n)
+
+    # print("p: %d    q: %d   s_0: %d" % (p,q,s_0))
+    b_arr = []
+    for i in range(length):
+        b_arr.append(s_0 % 2)
+        s_0 = chensta_crypto.fastExpo(s_0, 2, n)
+
+    return b_arr
+        

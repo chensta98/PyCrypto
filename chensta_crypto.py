@@ -125,10 +125,15 @@ def decToBin(n):
         n = n // 2
     
     return arr
-        
-        
-        
 
+def pollardRho(n):
+    x = 2
+    y = math.pow(x, 2) + 1
+    g = gcd(x - y, n)
 
+    while g <= 1 or g >= n:
+        x = (math.pow(x, 2) + 1) % n
+        y = (math.pow((math.pow(y, 2) + 1), 2) + 1) % n
+        g = gcd(x - y, n)
     
-
+    return g

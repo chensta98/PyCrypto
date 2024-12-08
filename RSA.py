@@ -19,7 +19,7 @@ class RSA:
 
 
     def setFactors(self, p, q):
-        if n == p * q:
+        if self.n == p * q:
             self.p = p
             self.q = q
             self.tot_n = (p-1) * (q-1)

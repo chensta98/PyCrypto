@@ -128,12 +128,15 @@ def decToBin(n):
 
 def pollardRho(n):
     x = 2
-    y = math.pow(x, 2) + 1
-    g = gcd(x - y, n)
+    y = pow(x, 2) + 1
+    g = gcd(abs(x - y), n)
 
     while g <= 1 or g >= n:
-        x = (math.pow(x, 2) + 1) % n
-        y = (math.pow((math.pow(y, 2) + 1), 2) + 1) % n
-        g = gcd(x - y, n)
+        x = (pow(x, 2) + 1) % n
+        y = (pow((pow(y, 2) + 1), 2) + 1) % n
+        g = gcd(abs(x - y), n)
     
     return g
+
+def binArrToDec(bin_arr):
+    return sum(val*(2**idx) for idx, val in enumerate(reversed(bin_arr)))

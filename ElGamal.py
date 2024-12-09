@@ -1,11 +1,11 @@
 import chensta_crypto
-import secrets
+import randomPrime
 
 class Alice:
     def __init__(self, G):
         self.G = G
         self.b = chensta_crypto.primRootSearch(G)
-        self.r = secrets.randbelow(G)
+        self.r = randomPrime.randomPrimeRange(G)
         self.b_r = chensta_crypto.fastExpo(self.b, self.r, G)
 
     def pubKey(self):
@@ -21,7 +21,7 @@ class Bob:
     def __init__(self, G, b):
         self.G = G
         self.b = b
-        self.l = secrets.randbelow(G)
+        self.l = randomPrime.randomPrimeRange(G)
         self.b_l = chensta_crypto.fastExpo(self.b, self.l, G)
 
     def pubKey(self):

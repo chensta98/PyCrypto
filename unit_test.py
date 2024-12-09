@@ -1,5 +1,8 @@
 import unittest
 import chensta_crypto
+import ElGamal
+import randomPrime
+import RSA
 
 class TestChenstaCrypto(unittest.TestCase):
 
@@ -22,6 +25,37 @@ class TestChenstaCrypto(unittest.TestCase):
     def test_PollardRho(self):
         self.assertIn(chensta_crypto.pollardRho(12674147), (11617, 1091))
 
+class TestElGamal(unittest.TestCase):
+    
+    def test_encryption(self):
+        G = randomPrime.randomPrimeBits(30)
+        
+        alice = ElGamal.Alice(G)
+        b = alice.b
+        bob = ElGamal.Bob(G, b)
+
+        alice.setKey(bob.b_l)
+        bob.setKey(alice.b_r)
+
+        m = 50
+        cypherText = alice.encrypt(m)
+
+        self.assertEqual(bob.decrypt(cypherText), 50)
+
+class TestRSA(unittest.TestCase):
+
+    def test_encryption(self):
+        p1 = randomPrime.randomPrimeBits(15)
+        q1 = randomPrime.randomPrimeBits(15)
+        n = p1 * q1
+        e = 65537
+
+        bob = RSA.RSA(p=p1,q=q1, e=e)
+        bob.setFactors(p1,q1)
+
+        alice = RSA.RSA(n=n, e=e)
+        cypherText = alice.encrypt(3981)
+        self.assertEqual(bob.decrypt(cypherText), 3981)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 import math
 import secrets
 import random
+import randomPrime
 
 # Greatest Common Divisor using Euclid Algo
 def gcd(a, b):
@@ -58,7 +59,8 @@ def primRootSearch(n):
 
     while rootFound == False:
         count = count + 1
-        root = secrets.randbelow(n)
+        # root = secrets.randbelow(n)
+        root = randomPrime.randomPrimeRange(n)
         rootFound = True
         factors = list(set(primeFactors(n-1)))
 
